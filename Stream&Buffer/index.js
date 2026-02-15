@@ -1,9 +1,16 @@
-//Reading from file using "ReadStream"
-// const fs = require('fs')
-// const { chunk } = require('lodash')
+//Read from a file a and showing it on a server.
 
-// const ourReadStream = fs.ReadStream(`${__dirname}/bigdata.txt`)
+const http = require('http');
+const fs = require('fs')
 
-// ourReadStream.on('data', (chunk) =>{
-//     console.log(chunk.toString())
-// })
+
+const server = http.createServer((req, res) => {
+    const ourReadStream = fs.ReadStream(`${__dirname}/bigdata.txt`)
+
+    ourReadStream.pipe(res)
+    
+});
+
+server.listen(3000)
+
+console.log("The server is running on port 3000.....")
